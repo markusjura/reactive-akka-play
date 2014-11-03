@@ -1,7 +1,3 @@
-Template for Typesafe presentations with [reveal.js](https://github.com/hakimel/reveal.js/).
+# Reactive with Play and Akka
 
-## License
-
-Copyright 2014 Typesafe, Inc. All rights reserved.
-
-Unless otherwise agreed, training materials may only be used for educational and reference purposes by individual named participants in a training course offered by Typesafe or a Typesafe training partner. Unauthorized reproduction, redistribution, or use of this material is prohibited.
+Slide deck for the J-Fall conference talk *Reactive with Play and Akka*. The slides are online at [markusjura.github.io/reactive-akka-play](http://markusjura.github.io/reactive-akka-play).
