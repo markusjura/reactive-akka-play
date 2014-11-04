@@ -133,13 +133,13 @@ public static Result index() {
 ``` java
 import play.libs.F.*;
 
-public static Integer calc() {
+private static Integer calc() {
     return (5134 * 5789) / 349;
 }
 
 public static Promise<Result> basicPromise() { 
   Promise<Integer> promise = Promise.promise(() -> calc()); 
-  return promise.map((Integer i) -> ok("Result is: " + i));
+  return promise.map(i -> ok("Result is: " + i));
 }
 ```
 
@@ -153,7 +153,7 @@ public static Promise<Result> basicPromise() {
 
 ``` java
 public static Promise<Result> getPage() { 
-  final Promise<WS.Response> promise = 
+  final Promise<WSResponse> promise = 
     WS.url("http://google.com").get();
   return promise.map(response -> ok(response.getBody()));
 }
@@ -173,13 +173,13 @@ Note:
 
 ``` java
 public static Promise<Result> composition() { 
-  final Promise<WS.Response> googlePromise = 
+  final Promise<WSResponse> googlePromise = 
     WS.url("http://google.com").get();
-  final Promise<WS.Response> twitterPromise = 
+  final Promise<WSResponse> twitterPromise = 
     WS.url("http://twitter.com").get();
 
-  return googlePromise.flatMap((google) ->
-    twitterPromise.map((twitter) ->
+  return googlePromise.flatMap(google ->
+    twitterPromise.map(twitter ->
       ok(google.getBody() + twitter.getBody())));
 }
 ```
@@ -222,18 +222,18 @@ CoffeeScript
 ## WebSockets Server Code
 
 ``` java
-public static WebSocket<String> echo() {
-  return new WebSocket<String>() {
-    public void onReady(final In<String> in, 
-                        final Out<String> out) {
-      
-      in.onMessage(out::write);
-    }
-  };
+public static WebSocket<JsonNode> echo() {
+  return WebSocket.whenReady((in, out) -> {      
+    in.onMessage(out::write);
+    in.onClose(() -> Logger.debug("Connection closed"));
+  });
 }
 ```
 
 Play Controller
+
+Note:
+- Double colon is used as method reference. Can be used if the signature of the callback is the same as the method beeing called.
 </script></section>
 
 
