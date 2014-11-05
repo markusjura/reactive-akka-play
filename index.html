@@ -63,7 +63,6 @@
     <li>Consultant <a href="http://typesafe.com">@Typesafe</a></li>
     <li>Living in Hamburg</li>
     <li>Co-Founder of <a href="https://testmunk.com">testmunk</a></li>
-    <li>3 years Scala, 10 years Java background</li>
 </ul>    
 <div>
     <iframe src="http://ghbtns.com/github-btn.html?user=markusjura&type=follow&count=false"
@@ -190,52 +189,6 @@ Note:
 - Three requests, two in parallel (depending on thread availability)
 - All async & non-blocking
 </script></section>
-
-<!-- ########################################################################################### -->
-
-<section data-markdown><script type="text/template">
-## WebSockets Overview
-
-![Websockets](images/websocket.png "Websockets")
-</script></section>
-
-<!-- ########################################################################################### -->
-
-<section data-markdown><script type="text/template">
-## WebSockets Client Code
-
-``` coffeescript
-ws = new WebSocket("ws://url/echo")
-ws.onmessage = (event) ->
-  alert(event.data)
-
-ws.onopen = () ->
-  ws.send("Echo")
-```  
-
-CoffeeScript
-</script></section>
-
-<!-- ########################################################################################### -->
-
-<section data-markdown><script type="text/template">
-## WebSockets Server Code
-
-``` java
-public static WebSocket<JsonNode> echo() {
-  return WebSocket.whenReady((in, out) -> {      
-    in.onMessage(out::write);
-    in.onClose(() -> Logger.debug("Connection closed"));
-  });
-}
-```
-
-Play Controller
-
-Note:
-- Double colon is used as method reference. Can be used if the signature of the callback is the same as the method beeing called.
-</script></section>
-
 
 <!-- ########################################################################################### -->
 <section data-markdown><script type="text/template">
